@@ -1,0 +1,92 @@
+body {
+	background-color: #222;
+}
+#wtf {
+	position: absolute;
+	top: 5px;
+}
+h1 {
+	position: relative;
+	width: 100%;
+	left: 0;
+	top: 10px;
+	text-align: center;
+	color: #fff;
+	font: 24px;
+	font-family: Verdana;
+}
+h2 {
+	position: relative;
+	width: 100%;
+	left: 0;
+	top: -5px;
+	text-align: center;
+	color: #bbb;
+	font-size: 16px;
+	font-family: Verdana;
+}
+a {
+	color: #eee;
+	text-decoration: none;
+}
+.tooltip {
+    display: none;
+    position: absolute;
+    color: #fff;
+    background: #666;
+    padding: 5px;
+}
+a:hover span {
+    display: block;
+    text-align: center;
+}
+main {
+	width: 520px;
+	padding: 40px 40px 40px 40px;
+	background-color: #eee;
+	position: absolute;
+	top: 100px;
+	left: calc( 50% - 300px );
+	transition: background-color .2s;
+}
+#explain_intro {
+	text-align: center;
+	display: none;
+}
+#written {
+	text-align: center;
+	background-color: lightyellow;
+	display: none;
+}
+#writing {
+	background-color: #fff;
+	height: 24px;
+}
+#written, #writing {
+	font: 20px Monospace;
+	padding: 4px 10px;
+}
+#reset {
+	margin-top: 20px;
+	width: 100%;
+	background-color: #666;
+	color: #eee;
+	font: 20px Verdana;
+	border: none;
+	padding: 10px 0 10px 0;
+	display: none;
+}
+#info {
+	font: 20px Verdana;
+	margin-top: 20px;
+}
+#info > div {
+	display: flex;
+}
+#info > div > span {
+	flex: 1;
+}
+#info > div > span:first-child {
+	text-align: right;
+	margin-right: 20px;
+}
