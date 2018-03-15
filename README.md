@@ -1,2 +1,1 @@
-# ea
-simplemente, escribe sin parar
+![escritura automática. simplemente, escribe sin parar](screenshot.png)
