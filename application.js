@@ -6,8 +6,10 @@ var beginTime,
 
 writing.addEventListener( 'click', function(){
 
-	writing.contentEditable = true;
-	writing.innerText = '';
+	if (writing.innerText=='haz click aquí para empezar a escribir') {
+		writing.contentEditable = true;
+		writing.innerText = '';
+	}
 
 	started = false;
 

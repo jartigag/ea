@@ -40,6 +40,9 @@ a:hover span {
     display: block;
     text-align: center;
 }
+.tooltip:hover {
+	color: #ffffcc;
+}
 main {
 	width: 520px;
 	padding: 40px 40px 40px 40px;
@@ -65,6 +68,7 @@ main {
 #written, #writing {
 	font: 20px Monospace;
 	padding: 4px 10px;
+	spellcheck: true;
 }
 #reset {
 	margin-top: 20px;
