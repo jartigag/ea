@@ -3,26 +3,25 @@ body {
 }
 #wtf {
 	position: absolute;
-	top: 5px;
+	top: 0.375em;
 }
 h1 {
 	position: relative;
 	width: 100%;
-	left: 0;
-	top: 10px;
+	margin-top: 0.625em;
 	text-align: center;
 	color: #fff;
-	font: 24px;
+	font: 1.5em;
 	font-family: Verdana;
 }
 h2 {
 	position: relative;
 	width: 100%;
 	left: 0;
-	top: -5px;
+	top: -0.625em;
 	text-align: center;
 	color: #bbb;
-	font-size: 16px;
+	font-size: 1em;
 	font-family: Verdana;
 }
 a {
@@ -34,7 +33,7 @@ a {
     position: absolute;
     color: #fff;
     background: #666;
-    padding: 5px;
+    padding: 0.375em;
 }
 a:hover span {
     display: block;
@@ -44,53 +43,57 @@ a:hover span {
 	color: #ffffcc;
 }
 main {
-	width: 520px;
-	padding: 40px 40px 40px 40px;
+	width: 70%;
+	padding: 2.5em 2.5em 2.5em 2.5em;
 	background-color: #eee;
-	position: absolute;
-	top: 100px;
-	left: calc( 50% - 300px );
+	position: relative;
+	margin-top: 0.375em;
+	margin-left: auto;
+    margin-right: auto;
 	transition: background-color .2s;
 }
 #explain_intro {
+	position: relative;
+	margin-top: 0.5em;
 	text-align: center;
 	display: none;
 }
 #written {
-	text-align: center;
 	background-color: lightyellow;
 	display: none;
 }
 #writing {
 	background-color: #fff;
-	height: 24px;
 }
 #written, #writing {
-	font: 20px Monospace;
-	padding: 4px 10px;
+	font: 150% Monospace;
+	padding: 0.25em 0.625em;
+	text-align: center;
+	contenteditable: true;
 	spellcheck: true;
 }
 #reset {
-	margin-top: 20px;
+	margin-top: 0.5em;
 	width: 100%;
 	background-color: #666;
 	color: #eee;
-	font: 20px Verdana;
+	font: 1.25em Verdana;
 	border: none;
-	padding: 10px 0 10px 0;
+	padding: 0.625em 0 0.625em 0;
 	display: none;
 }
 #info {
-	font: 20px Verdana;
-	margin-top: 20px;
+	font: 1.25em Verdana;
+	margin-top: 1.25em;
 }
 #info > div {
 	display: flex;
+  	justify-content: center;
 }
 #info > div > span {
-	flex: 1;
+	text-align: right;
 }
 #info > div > span:first-child {
-	text-align: right;
-	margin-right: 20px;
+	text-align: left;
+	margin-right: 1.25em;
 }

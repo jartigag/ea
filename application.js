@@ -59,7 +59,6 @@ var interval = window.setInterval( function(){
 
 reset.addEventListener( 'click', function(){
 
-	writing.contentEditable = true;
 	writing.innerText = '';
 	written.innerText = '';
 
