@@ -1,3 +1,20 @@
+/* 
+
+TODO:
+- poder fijar al principio la duración del ejercicio
+
+- penalización por repetir palabras (x2 si es en la misma frase)
+
+	pensar en el diseño de la notificación de penalización para que el usuario se dé cuenta pero no pierda el flujo de escritura
+
+- imprimir resultados al final: tiempo, kpm, wpm, frases, penalización
+
+- registrar los ejercicios (tanto los contadores como el texto) durante la sesión
+
+- ofrecer la opción de guardarlos después
+
+*/
+
 var beginTime,
 	started = false,
 	stroken = 0,
@@ -11,10 +28,13 @@ writing.addEventListener( 'click', function(){
 		writing.innerText = '';
 	}
 
-	started = false;
+	if( !started ){
 
-	writing.focus();
-	stroken = 0;
+		started = true;
+		stroken = 0;
+		beginTime = Date.now();
+	}
+
 });
 
 writing.addEventListener( 'keydown', function(e){
@@ -53,7 +73,8 @@ var interval = window.setInterval( function(){
 			words = writing.innerText.match(/(\w+)/g).length + writtenWords; //regex: \w+ between one and unlimited word characters, /g greedy - don't stop after the first match
 		}
 		wpm.innerText = ( words / min ) | 0;
-		time.innerText = ( min | 0 ) + ':' + ( ( ( span % 60000 ) / 1000 ) | 0 ).toString().padStart(2, "0");
+		sec = ( span % 60000 ) / 1000;
+		time.innerText = ( min | 0 ) + ':' + ( sec | 0 ).toString().padStart(2, "0");
 	}
 }, 50 );
 
