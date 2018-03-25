@@ -16,6 +16,7 @@ var strokes = 0,
 	writtenStrokes = 0,
 	words = 0,
 	writtenWords = 0,
+	parsedWritten = [],
 	sentences = 0,
 	penalty = 0,
 	beginTime,
@@ -55,7 +56,6 @@ writing.addEventListener( 'keydown', function(e){
 		writtenWords = words;
 		strokes = 0;
 		words = 0;
-		penalty = -1; // delete
 		calcPenalty();
 		written.style.display = 'block';
 		written.innerText += writing.innerText + '\r\n';
@@ -83,7 +83,6 @@ reset.addEventListener( 'click', function(){
 	strokes = 0;
 	words = 0;
 	sentences = 0;
-	penalty = 0;
 	calcPenalty();
 
 	writing.focus();
@@ -109,10 +108,10 @@ var interval = window.setInterval( function(){
 		}
 		kpm.innerText = ( strokes / mins ) | 0; // | 0: convert anything to integer
 		wpm.innerText = ( words / mins ) | 0;
-		calcPenalty();
+		//calcPenalty();
 
 		secs = ( span % 60000 ) / 1000;
-		time.innerText = ( mins | 0 ) + ':' + ( secs | 0 ).toString().padStart(2, "0");
+		//time.innerText = ( mins | 0 ) + ':' + ( secs | 0 ).toString().padStart(2, "0");
 		if (Math.floor(span / 1000) >= duration) {
 			time.style.color = 'red';
 			ended = true;
@@ -125,9 +124,23 @@ var interval = window.setInterval( function(){
 
 function calcPenalty() {
 	//TODO: check repeated words (x2 if it's repeated in the same sentence)
+
+	penalty = 0;
+	parsedWriting = writing.innerText.split(' ');
+
+	for(i=0;i<=parsedWriting.length;i++) {
+		if (parsedWritten.indexOf(parsedWriting[i])) { //FIX: condition not working properly
+			penalty += -1;
+			window.alert('parsedWriting['+i+']='+parsedWriting[i]); //DEBUGGING
+		}
+	}
+
+	parsedWritten = parsedWritten.concat(parsedWriting);
+
 	pen.innerText = penalty;
+	
 	if (penalty<0) {
-		pen.style.color = 'red';
+		pen.style.color = 'darkred';
 	} else {
 		pen.style.color = '';
 	}
