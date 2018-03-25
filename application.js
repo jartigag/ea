@@ -3,7 +3,7 @@
 TODO:
 - penalización por repetir palabras (x2 si es en la misma frase)
 
-	pensar en el diseño de la notificación de penalización
+	!!--> pensar en el diseño de la notificación de penalización
 	para que el usuario se dé cuenta pero no pierda el flujo de escritura
 
 - registrar los ejercicios (tanto los contadores como el texto) durante la sesión
@@ -17,6 +17,7 @@ var strokes = 0,
 	words = 0,
 	writtenWords = 0,
 	sentences = 0,
+	penalty = 0,
 	beginTime,
 	duration = 60, //in seconds
 	started = false,
@@ -54,6 +55,8 @@ writing.addEventListener( 'keydown', function(e){
 		writtenWords = words;
 		strokes = 0;
 		words = 0;
+		penalty = -1; // delete
+		calcPenalty();
 		written.style.display = 'block';
 		written.innerText += writing.innerText + '\r\n';
 		writing.innerText = '';
@@ -80,6 +83,8 @@ reset.addEventListener( 'click', function(){
 	strokes = 0;
 	words = 0;
 	sentences = 0;
+	penalty = 0;
+	calcPenalty();
 
 	writing.focus();
 	beginTime = Date.now();
@@ -104,6 +109,7 @@ var interval = window.setInterval( function(){
 		}
 		kpm.innerText = ( strokes / mins ) | 0; // | 0: convert anything to integer
 		wpm.innerText = ( words / mins ) | 0;
+		calcPenalty();
 
 		secs = ( span % 60000 ) / 1000;
 		time.innerText = ( mins | 0 ) + ':' + ( secs | 0 ).toString().padStart(2, "0");
@@ -112,7 +118,17 @@ var interval = window.setInterval( function(){
 			ended = true;
 			window.alert('time = '+time.innerText+
 				'\nkpm = '+kpm.innerText+', wpm = '+wpm.innerText+
-				'\nsentences = '+sentences); //+', penalty repeated words = '
+				'\nsentences = '+sentences+', penalty for repeated words = '+penalty);
 		}
 	}
 }, 100 );
+
+function calcPenalty() {
+	//TODO: check repeated words (x2 if it's repeated in the same sentence)
+	pen.innerText = penalty;
+	if (penalty<0) {
+		pen.style.color = 'red';
+	} else {
+		pen.style.color = '';
+	}
+}
