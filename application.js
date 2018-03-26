@@ -56,7 +56,7 @@ writing.addEventListener( 'keydown', function(e){
 		writtenWords = words;
 		strokes = 0;
 		words = 0;
-		calcPenalty();
+		//calcPenalty();
 		written.style.display = 'block';
 		written.innerText += writing.innerText + '\r\n';
 		writing.innerText = '';
@@ -83,7 +83,7 @@ reset.addEventListener( 'click', function(){
 	strokes = 0;
 	words = 0;
 	sentences = 0;
-	calcPenalty();
+	//calcPenalty();
 
 	writing.focus();
 	beginTime = Date.now();
@@ -108,7 +108,6 @@ var interval = window.setInterval( function(){
 		}
 		kpm.innerText = ( strokes / mins ) | 0; // | 0: convert anything to integer
 		wpm.innerText = ( words / mins ) | 0;
-		//calcPenalty();
 
 		secs = ( span % 60000 ) / 1000;
 		//time.innerText = ( mins | 0 ) + ':' + ( secs | 0 ).toString().padStart(2, "0");
