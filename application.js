@@ -20,7 +20,7 @@ var strokes = 0,
 	sentences = 0,
 	penalty = 0,
 	beginTime,
-	duration = 60, //in seconds
+	duration = 120, //in seconds
 	started = false,
 	ended = false;
 
@@ -56,7 +56,7 @@ writing.addEventListener( 'keydown', function(e){
 		writtenWords = words;
 		strokes = 0;
 		words = 0;
-		//calcPenalty();
+		calcPenalty();
 		written.style.display = 'block';
 		written.innerText += writing.innerText + '\r\n';
 		writing.innerText = '';
@@ -83,7 +83,9 @@ reset.addEventListener( 'click', function(){
 	strokes = 0;
 	words = 0;
 	sentences = 0;
-	//calcPenalty();
+	parsedWritten = [];
+	penalty = 0;
+	calcPenalty();
 
 	writing.focus();
 	beginTime = Date.now();
@@ -110,7 +112,7 @@ var interval = window.setInterval( function(){
 		wpm.innerText = ( words / mins ) | 0;
 
 		secs = ( span % 60000 ) / 1000;
-		//time.innerText = ( mins | 0 ) + ':' + ( secs | 0 ).toString().padStart(2, "0");
+		time.innerText = ( mins | 0 ) + ':' + ( secs | 0 ).toString().padStart(2, "0");
 		if (Math.floor(span / 1000) >= duration) {
 			time.style.color = 'red';
 			ended = true;
@@ -122,22 +124,34 @@ var interval = window.setInterval( function(){
 }, 100 );
 
 function calcPenalty() {
-	//TODO: check repeated words (x2 if it's repeated in the same sentence)
 
-	penalty = 0;
-	parsedWriting = writing.innerText.split(' ');
+	parsedWriting = writing.innerText.toLowerCase().split(' ');
 
-	for(i=0;i<=parsedWriting.length;i++) {
-		if (parsedWritten.indexOf(parsedWriting[i])) { //FIX: condition not working properly
-			penalty += -1;
-			window.alert('parsedWriting['+i+']='+parsedWriting[i]); //DEBUGGING
+	for (i=0;i<parsedWriting.length;i++) {
+		if (parsedWriting[i].length>3) { // only consider words larger than 3 letters
+			for (j=i+1;j<parsedWriting.length;j++) {
+				if (parsedWriting[j].match(parsedWriting[i])) {
+window.alert(parsedWriting[i]+'['+i+'] se ha repetido en la misma frase'); //DEBUGGING
+					penalty += -2; // penalty for repeating a word in the same sentence
+				}	
+			}
+			if (parsedWritten.length>0) { // exclude first sentence
+				if (parsedWritten.indexOf(parsedWriting[i])>-1) {
+window.alert(parsedWriting[i]+'['+i+'] se ha repetido una frase anterior'); //DEBUGGING
+					penalty += -1; // penalty for repeating a word which was written before
+				}
+			}
 		}
 	}
 
-	parsedWritten = parsedWritten.concat(parsedWriting);
+	for (i=0; i<parsedWriting.length; i++) {
+	  parsedWritten = parsedWritten.concat(parsedWriting[i].toLowerCase());
+	}
+
+	//parsedWritten = parsedWritten.concat(parsedWriting.toLowerCase());
 
 	pen.innerText = penalty;
-	
+
 	if (penalty<0) {
 		pen.style.color = 'darkred';
 	} else {
