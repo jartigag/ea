@@ -142,9 +142,9 @@ var interval = window.setInterval( function(){
 		if (Math.floor(span / 1000) >= durationSecs) {
 			time.style.color = 'red';
 			ended = true;
-			window.alert('time = '+time.innerText+
-				'\nkpm = '+kpm.innerText+', wpm = '+wpm.innerText+
-				'\nsentences = '+sentences+', penalty for repeated words = '+penalty);
+			window.alert('tiempo = '+time.innerText+
+				'\npulsaciones/minuto = '+kpm.innerText+', palabras/minuto = '+wpm.innerText+
+				'\nfrases = '+sentences+', penalización por palabras repetidas = '+penalty);
 		}
 	}
 }, 100 );
@@ -159,14 +159,12 @@ function calcPenalty() {
 		if (parsedWriting[i].length>3) { // only consider words larger than 3 letters
 			for (j=i+1;j<parsedWriting.length;j++) {
 				if (parsedWriting[j].match(parsedWriting[i])) {msgpen.innerText += parsedWriting[i];
-//window.alert(parsedWriting[i]+'['+i+'] se ha repetido en la misma frase'); //DEBUGGING
 					repeatedWords = repeatedWords.concat(parsedWriting[i]);
 					penalty += -2; // penalty for repeating a word in the same sentence
 				}	
 			}
 			if (parsedWritten.length>0) { // exclude first sentence
 				if (parsedWritten.indexOf(parsedWriting[i])>-1) {
-//window.alert(parsedWriting[i]+'['+i+'] se ha repetido una frase anterior'); //DEBUGGING
 					repeatedWords = repeatedWords.concat(parsedWriting[i]);
 					penalty += -1; // penalty for repeating a word which was written before
 				}
@@ -179,7 +177,7 @@ function calcPenalty() {
 	}
 
 	//parsedWritten = parsedWritten.concat(parsedWriting.toLowerCase());
-	
+
 	if (repeatedWords.length>0) {
 		msgpen.innerText = repeatedWords.join(', ');
 	}

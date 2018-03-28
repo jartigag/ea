@@ -106,3 +106,14 @@ main {
 	display: none;
 	font-weight: bold;
 }
+footer {
+	margin: 1.25em;
+	color: #eee;
+	text-align: center;
+}
+footer div > span > svg {
+	fill: #eee;
+}
+footer div > span > a {
+	color: #fc0;
+}
