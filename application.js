@@ -20,9 +20,36 @@ var strokes = 0,
 	sentences = 0,
 	penalty = 0,
 	beginTime,
-	duration = 120, //in seconds
+	durationSecs = 120,
 	started = false,
 	ended = false;
+
+duration.addEventListener( 'click', function(){
+	duration.contentEditable = true;
+	duration.focus();
+});
+
+duration.addEventListener( 'blur', function(){
+	duration.contentEditable = false;
+	if (parseInt(duration.innerText) < 1200){
+		durationSecs = duration.innerText;
+	} else {
+		window.alert("la duración del ejercicio debe ser un número entero de segundos menor que 1200");
+		duration.innerText='120';
+	}
+});
+
+duration.addEventListener( 'keydown', function(e){
+	if( e.keyCode === 13 ){ // return key
+		duration.contentEditable = false;
+		if (parseInt(duration.innerText) < 1200){
+			durationSecs = duration.innerText;
+		} else {
+			window.alert("la duración del ejercicio debe ser un número entero de segundos menor que 1200");
+			duration.innerText='120';
+		}
+	}
+});
 
 writing.addEventListener( 'click', function(){
 
@@ -37,7 +64,6 @@ writing.addEventListener( 'click', function(){
 		writing.innerText = '';
 		writing.focus();
 	}
-
 });
 
 writing.addEventListener( 'keydown', function(e){
@@ -113,7 +139,7 @@ var interval = window.setInterval( function(){
 
 		secs = ( span % 60000 ) / 1000;
 		time.innerText = ( mins | 0 ) + ':' + ( secs | 0 ).toString().padStart(2, "0");
-		if (Math.floor(span / 1000) >= duration) {
+		if (Math.floor(span / 1000) >= durationSecs) {
 			time.style.color = 'red';
 			ended = true;
 			window.alert('time = '+time.innerText+
@@ -127,17 +153,21 @@ function calcPenalty() {
 
 	parsedWriting = writing.innerText.toLowerCase().split(' ');
 
+	repeatedWords = [];
+
 	for (i=0;i<parsedWriting.length;i++) {
 		if (parsedWriting[i].length>3) { // only consider words larger than 3 letters
 			for (j=i+1;j<parsedWriting.length;j++) {
-				if (parsedWriting[j].match(parsedWriting[i])) {
-window.alert(parsedWriting[i]+'['+i+'] se ha repetido en la misma frase'); //DEBUGGING
+				if (parsedWriting[j].match(parsedWriting[i])) {msgpen.innerText += parsedWriting[i];
+//window.alert(parsedWriting[i]+'['+i+'] se ha repetido en la misma frase'); //DEBUGGING
+					repeatedWords = repeatedWords.concat(parsedWriting[i]);
 					penalty += -2; // penalty for repeating a word in the same sentence
 				}	
 			}
 			if (parsedWritten.length>0) { // exclude first sentence
 				if (parsedWritten.indexOf(parsedWriting[i])>-1) {
-window.alert(parsedWriting[i]+'['+i+'] se ha repetido una frase anterior'); //DEBUGGING
+//window.alert(parsedWriting[i]+'['+i+'] se ha repetido una frase anterior'); //DEBUGGING
+					repeatedWords = repeatedWords.concat(parsedWriting[i]);
 					penalty += -1; // penalty for repeating a word which was written before
 				}
 			}
@@ -149,8 +179,21 @@ window.alert(parsedWriting[i]+'['+i+'] se ha repetido una frase anterior'); //DE
 	}
 
 	//parsedWritten = parsedWritten.concat(parsedWriting.toLowerCase());
+	
+	if (repeatedWords.length>0) {
+		msgpen.innerText = repeatedWords.join(', ');
+	}
 
-	pen.innerText = penalty;
+
+	if (pen.innerText==penalty) { 	//if penalty doesn't change, hide explanation message
+		repeated.style.display = 'none';
+		msgpen.innerText = '';
+		msgpen.style.display = 'none';
+	} else { 						//if it changes, show its new value and explanation message
+		pen.innerText = penalty;
+		repeated.style.display = 'block';
+		msgpen.style.display = 'block';
+	}
 
 	if (penalty<0) {
 		pen.style.color = 'darkred';

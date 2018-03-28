@@ -7,23 +7,17 @@
    <meta name=description content="simplemente, escribe sin parar">
    <meta name=author content="jartigag">
 	<title>escritura automática | jartigag</title>
-	<meta property="og:title" content="escritura automática | jartigag" />
-	<meta property="og:locale" content="es_ES" />
 	<meta name="description" content="simplemente, escribe sin parar" />
-	<meta property="og:description" content="simplemente, escribe sin parar" />
 	<link rel="canonical" href="https://jartigag.github.io/ea" />
-	<meta property="og:url" content="https://jartigag.github.io/ea" />
-	<meta property="og:site_name" content="escritura automática | jartigag" />
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:site" content="@" />
 	<script type="application/ld+json">
 	{"name":"escritura automática","description":"simplemente, escribe sin parar","author":"jartigag","@type":"WebSite","url":"https://jartigag.github.io/ea"</script>
-	  <link rel="canonical" href="https://jartigag.github.io/ea">
-	  <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<h1>escritura automática</h1>
-	<h2>simplemente, escribe sin parar</h2>
+	<h2>simplemente, escribe sin parar durante <span id=duration>120</span> segundos</h2>
 	<a id=wtf href="https://es.wikipedia.org/wiki/Escritura_autom%C3%A1tica" target="_blank">[?]<span class=tooltip>escritura automática? wtf?</span></a>
 	<main id=main>
 		<div id=writing>haz click aquí para empezar a escribir</div>
@@ -32,8 +26,9 @@
 		<div id=info>
 			<div><span>pulsaciones/minuto</span><span id=kpm>0</span></div>
 			<div><span>palabras/minuto</span><span id=wpm>0</span></div>
-			<div><span>penalización</span><span id=pen>0</span></div>
 			<div><span>tiempo</span><span id=time>0:00</span></div>
+			<div><span>penalización</span><span id=pen>0</span></div>
+			<div><span id=repeated>has repetido </span><span id=msgpen>msgpen</span></div>
 		</div>
 		<div id=written></div>
 	</main>
