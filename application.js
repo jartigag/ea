@@ -1,10 +1,6 @@
 /* 
 
 TODO:
-- penalización por repetir palabras (x2 si es en la misma frase)
-
-	!!--> pensar en el diseño de la notificación de penalización
-	para que el usuario se dé cuenta pero no pierda el flujo de escritura
 
 - registrar los ejercicios (tanto los contadores como el texto) durante la sesión
 
@@ -143,8 +139,10 @@ var interval = window.setInterval( function(){
 			time.style.color = 'red';
 			ended = true;
 			window.alert('tiempo = '+time.innerText+
-				'\npulsaciones/minuto = '+kpm.innerText+', palabras/minuto = '+wpm.innerText+
-				'\nfrases = '+sentences+', penalización por palabras repetidas = '+penalty);
+				'\npulsaciones/minuto = '+kpm.innerText+
+				'\npalabras/minuto = '+wpm.innerText+
+				'\nfrases = '+sentences+
+				'\npenalización por palabras repetidas = '+penalty);
 		}
 	}
 }, 100 );
@@ -183,11 +181,11 @@ function calcPenalty() {
 	}
 
 
-	if (pen.innerText==penalty) { 	//if penalty doesn't change, hide explanation message
+	if (pen.innerText==penalty) {    //if penalty doesn't change, hide explanation message
 		repeated.style.display = 'none';
 		msgpen.innerText = '';
 		msgpen.style.display = 'none';
-	} else { 						//if it changes, show its new value and explanation message
+	} else {                         //if it changes, show its new value and explanation message
 		pen.innerText = penalty;
 		repeated.style.display = 'block';
 		msgpen.style.display = 'block';
