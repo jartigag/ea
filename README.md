@@ -4,4 +4,4 @@
 
 [![escritura automática. simplemente, escribe sin parar](screenshot.png)](https://jartigag.github.io/ea)
 
-[post](https://jartigag.github.io/cubiertos-para-twitter) presentando la herramienta: [https://jartigag.github.io/escritura-automática](https://jartigag.github.io/escritura-automática)
+[post](https://jartigag.github.io/escritura-automática) presentando la herramienta: [https://jartigag.github.io/escritura-automática](https://jartigag.github.io/escritura-automática)
